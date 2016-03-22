@@ -4,8 +4,14 @@ let bcrypt = require('bcrypt');
 let jwt = require('jsonwebtoken');
 
 let userSchema = mongoose.Schema({
-  name: String,
-  password: String
+  name: {
+    type: String,
+    required: [true, 'You need to input user name!!']
+  },
+  password: { 
+    type: String,
+    required: [true, 'You need to input password!!']
+  }
 });
 
 userSchema.pre('save', function(next){
