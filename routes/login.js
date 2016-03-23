@@ -21,6 +21,10 @@ module.exports = (router, User)=>{
         return console.log('Not saved : ' + err);
       }
       console.log('User data is saved! ' + user);
+      var tokenGen = user.generateToken();
+      console.log(tokenGen);
+      console.log('Here is err : ' + err);
+      res.send({token: tokenGen});
       res.end();
     });
   });
@@ -42,7 +46,8 @@ module.exports = (router, User)=>{
       let valid = user.compareHash(password);
       console.log(valid);
       if(!valid){
-        return res.json({status: 'failure'})
+        res.json({status: 'failure'})
+        return
       }
     res.json({token: user.generateToken()});
     res.end();
@@ -66,7 +71,8 @@ module.exports = (router, User)=>{
       let valid = user.compareHash(password);
       console.log(valid);
       if(!valid){
-        return res.json({status: 'failure'})
+        res.json({status: 'failure'})
+        return
       }
       res.json({token: user.generateToken()});
       res.end();
@@ -95,4 +101,5 @@ module.exports = (router, User)=>{
       res.json({token: user.generateToken()});
       res.end();
     });
-}
+  });
+};

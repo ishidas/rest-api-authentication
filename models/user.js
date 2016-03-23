@@ -8,7 +8,7 @@ let userSchema = mongoose.Schema({
     type: String,
     required: [true, 'You need to input user name!!']
   },
-  password: { 
+  password: {
     type: String,
     required: [true, 'You need to input password!!']
   }
@@ -27,7 +27,8 @@ userSchema.methods.compareHash = function(password){
 };
 
 userSchema.methods.generateToken = function (){
-  jwt.sign({_id: this._id}, 'FLUFFBALL');
+  console.log('generating token');
+  return jwt.sign({_id: this._id}, 'FLUFFBALL');
 };
 
 let User = mongoose.model('User', userSchema);
