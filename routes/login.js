@@ -1,7 +1,4 @@
 'use strict';
-let jwt = require('jsonwebtoken');
-// let User = require( __dirname + '/../models/user');
-let bcrypt = require('bcrypt');
 
 module.exports = (router, User)=>{
   router.post('/register', (req, res)=>{
@@ -46,11 +43,11 @@ module.exports = (router, User)=>{
       let valid = user.compareHash(password);
       console.log(valid);
       if(!valid){
-        res.json({status: 'failure'})
-        return
+        res.json({status: 'failure'});
+        return;
       }
-    res.json({token: user.generateToken()});
-    res.end();
+      res.json({token: user.generateToken()});
+      res.end();
     });
   });
 
@@ -71,8 +68,8 @@ module.exports = (router, User)=>{
       let valid = user.compareHash(password);
       console.log(valid);
       if(!valid){
-        res.json({status: 'failure'})
-        return
+        res.json({status: 'failure'});
+        return;
       }
       res.json({token: user.generateToken()});
       res.end();
@@ -96,7 +93,7 @@ module.exports = (router, User)=>{
       let valid = user.compareHash(password);
       console.log(valid);
       if(!valid){
-        return res.json({status: 'failure'})
+        return res.json({status: 'failure'});
       }
       res.json({token: user.generateToken()});
       res.end();
